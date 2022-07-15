@@ -52,16 +52,9 @@ const pedirCarta = ()=>{
   // valor de cada carta 
   const valorCarta = (carta)=>{
        const valor = carta.substring(0, carta.length - 1);
-       let puntos = 0;
-       console.log({valor});
-       if ( isNaN(valor)){
-        // console.log('no es un numero')
-        puntos = ( valor === 'A') ? 11 : 10;
-      
-      }else{
-         //console.log(' es un number')
-         puntos = valor * 1;
-       }
-       console.log(puntos)
+      return (isNaN(valor)) ?
+      (valor === 'A') ? 11 : 10
+      : valor * 1;
   }
-  valorCarta('AD')
+ const valor =  valorCarta(pedirCarta())
+ console.log({valor});
