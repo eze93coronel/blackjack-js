@@ -6,6 +6,13 @@
 let deck = []; 
 const tipos = ['C','D','H','S'];
 const especiales = ['A','J','Q','K'];
+let puntosJugador = 0;
+   puntosComputadora = 0;
+//referencias del html 
+
+  const btnPedir = document.querySelector('#btnPedir')
+  const puntosHTML = document.querySelectorAll('small');
+  const divCartasJugador = document.querySelector('#jugador-cartas')
 
 //esta fb crea una nueba baraja
 const crearDeck = ()=>{
@@ -40,13 +47,10 @@ const pedirCarta = ()=>{
  }
 
    const carta = deck.pop() // va la ultima carta de m i arreglo
-  
-   console.log(deck);
-   console.log(carta) // carta debe ser de la baraja,
    return carta;
 
 }
-  // pedirCarta();
+// pedirCarta();
 
 
   // valor de cada carta 
@@ -56,5 +60,25 @@ const pedirCarta = ()=>{
       (valor === 'A') ? 11 : 10
       : valor * 1;
   }
- const valor =  valorCarta(pedirCarta())
- console.log({valor});
+
+  //eventos 
+btnPedir.addEventListener('click', ()=>{
+  const carta = pedirCarta()
+  puntosJugador = puntosJugador + valorCarta(carta)
+  puntosHTML[0].innerText = puntosJugador;
+
+  const imgCarta = document.createElement('img');
+  imgCarta.src = `/assets/cartas/${carta}.png`;
+ imgCarta.classList.add('carta')
+  divCartasJugador.append(imgCarta);
+
+  if(puntosJugador > 21 ){
+    console.warn('lo siento pa perdiste');
+    btnPedir.disabled = true;
+  }else  if(puntosJugador === 21){
+    console.warn('ganaste la partida')
+    btnPedir.disabled = true;
+
+  }
+
+})
